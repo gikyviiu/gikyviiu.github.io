@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
 	<meta charset="utf-8">
 	<title>Изображения</title>
@@ -41,6 +42,31 @@
 		найдено не будет, то будет выбран файл, указанный  атрибутом  <code>src</code> элемента <code>img</code>. 
 		Затем выбранное изображение отображается в пространстве, занятом элементом <code>img</code>. 
 		</p>
+
+
+		<!-- альтернативноый текст -->
+        <img src="images/muscle.png" alt="Muscle">
+        <img src="images/light.gif" alt="Light">
+        <img src="images/aquaria.jpg" alt="Aquaria">
+
+		<!-- размеры изображения -->
+        <img src="images/slon.png" alt="Slon" width="211" height="180">
+
+		 <!-- figure и figcaption -->
+		 <figure>
+            <img src="images/mushroom.jpg" alt="Mushroom">
+            <figcaption>Гриб</figcaption>
+        </figure>
+
+		<!-- picture -->
+        <picture>
+            <source media="(max-width: 600px)" srcset="images/">
+            <source media="(max-width: 1200px)" srcset="images/">
+            <img src="images/" alt="Description">
+        </picture>
+
+
+
 	</section>
 </body>
 </html>
