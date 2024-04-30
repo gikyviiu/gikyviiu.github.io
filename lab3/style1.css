@@ -1,0 +1,26 @@
+body{
+    color: black;
+    background-color: white;
+}
+
+p{
+    text-align: right;
+}
+
+h1,h2{
+    color: red;
+    font-family: Arial, sans-serif;
+    text-align: right;
+}
+
+em{
+    color: green;
+}
+
+.wrapper{
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
