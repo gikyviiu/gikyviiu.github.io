@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма</title>
+</head>
+<body>
+<h1>Форма регистрации пользователя</h1>
+<form action="#">
+    <table>
+        <tr>
+            <td><label for="1">E-mail</label></td>
+            <td><input type="email" id="1" required placeholder="Введите e-mail"></td>
+        </tr>
+        <tr>
+            <td><label for="2">Пароль</label></td>
+            <td><input type="password" id="2" required placeholder="Введите пароль"></td>
+        </tr>
+        <tr>
+            <td><label>Пол</label></td>
+            <td>
+                <input type="radio" id="male" name="gender" value="male"><label for="male">Мужчина</label>
+                <input type="radio" id="female" name="gender" value="female"><label for="female">Женщина</label></td>
+        </tr>
+        <tr>
+            <td><label for="birth">Год рождения</label></td>
+            <td><select id="birth">
+                    <script>
+                        let a = 1940
+                        while(a<2024)
+                        {
+                            document.getElementById('birth').innerHTML += '<option ' + (a === 1981 ? 'selected' : '') + '>' + a + '</option>';
+                            a++
+                        }
+                    </script>
+                </select>
+                <span>-й</span>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label>Я знаю</label></td>
+            <td>
+                <input type="checkbox" id="russian" name="language" value="russian" checked><labeL for="russian">Русский</label><br>
+                <input type="checkbox" id="spanish" name="language" value="spanish"><labeL for="spanish">Испанский</label><br>
+                <input type="checkbox" id="germany" name="language" value="germany"><labeL for="germany">Немецкий</label><br>
+                <input type="checkbox" id="english" name="language" value="english"><labeL for="english">Английский</label><br>
+                <input type="checkbox" id="chinese" name="language" value="chinese"><labeL for="chinese">Китайский</label><br>
+            </td>
+        </tr>
+
+        <tr>
+            <td><label for="3">Обо мне</label></td>
+            <td><textarea id="3" cols="30" rows="10" placeholder="Напишите коротко о себе"></textarea></td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td>
+                <button type="submit">Готово</button>
+                <button type="reset">Очистить</button>
+            </td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>
