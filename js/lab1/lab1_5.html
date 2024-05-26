@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab1_5</title>
+</head>
+<body>
+    <script>
+    'use strict'
+    var s = +prompt("Введите кол-во строк:")
+    var dog = 3, cat = 2
+    for(let i = 0; i < s; i++){
+    if (!dog && !cat){dog = 3, cat = 2}
+    if(dog){
+        let a = 6 - dog - cat
+        console.log("dog\t".repeat(dog)+"cat\t".repeat(cat)+"dog\t".repeat(a))
+        dog -= 1
+    }
+    else{
+        let dog2 = 3
+        let a = 6 - dog2 - cat
+        console.log("cat\t".repeat(cat)+"dog\t".repeat(dog2)+"cat\t".repeat(a))
+        cat -= 1
+    }
+    }
+    </script>
+</body>
+</html>

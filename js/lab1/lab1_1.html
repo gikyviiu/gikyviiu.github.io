@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab1_1</title>
+</head>
+<body>
+    <script>
+        'use strict'
+        let age = prompt("Укажите Ваш возраст")
+        let gender = prompt("Укажите ваш пол (муж/жен)")
+        if (age >= 0 && age <= 17)
+            alert("Вам работать ещё рано — учитесь")
+        else if (age >= 18)
+            if((age <= 59 && gender === "муж") || (age <= 54 && gender === "жен"))
+                alert("Вам ещё работать и работать")
+            else if((age >= 60 && gender === "муж") || (age >= 55 && gender === "жен"))
+                alert("Скоро пенсия!")
+            else alert("Да кто ты такой?")
+        else alert("Да кто ты такой?")
+    </script>
+</body>
+</html>

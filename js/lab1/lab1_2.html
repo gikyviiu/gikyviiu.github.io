@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab1_2</title>
+</head>
+
+<body>
+
+    <script>
+        "use strict";
+        let num = +prompt("Введите целое число:");
+        let ok;
+        if(num > 0 && Number.isInteger(num)){
+        if (num % 10 == 1 && num % 100 != 11) {
+            ok = 'а';
+            
+        }
+        else if ((num % 10 >= 2 && num % 10 <= 4) && !(num % 100 > 10 &&  num % 100 < 20)) {
+            ok = 'ы';
+        }
+        else {
+            ok = '';
+        }
+
+
+        switch (ok) {
+            case 'а':
+                alert(`На ветке сидит ${num} ворон${ok}`);
+                break;
+            case 'ы':
+                alert(`На ветке сидит ${num} ворон${ok}`);
+                break;
+            case '':
+                alert(`На ветке сидит ${num} ворон${ok}`);
+                break;
+            default:
+                alert("Введите целое число:");
+                break;
+        }
+        
+    }
+    else alert("Введите целое число");
+    </script>
+
+</body>
+
+</html>
