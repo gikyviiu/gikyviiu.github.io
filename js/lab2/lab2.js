@@ -42,7 +42,7 @@ function factorial(n){
 /**
  * считает n-ное число фибоначи
  * @param {number} n 
- * @returns {bigint}
+ * @returns {number}
  */
 function fib(n){
     if (!n) return BigInt(0)
@@ -61,13 +61,13 @@ function fib(n){
  * если равны, то возвращает null
  * @param {number} x
  * @param {number} y
- * @returns
+ * @returns {function} 
  */
 function compare(x){return function(y){return y==x ? null : y>x}}
 
 
 /**
- * считает сумму заданных чисел
+ * возвращает сумму всех своих аргументов
  * @param  {...number} args 
  * @returns {number}
  */
@@ -76,3 +76,18 @@ function sum(...args){
     for(let i of args) s+=i
     return s
 }
+
+/**
+ * принимает на вход объект и возвращает этот объект с 
+ * добавленным к нему символьным свойством blackSpot=true
+ * 
+ * 
+ */
+function addBlackSpot(obj) {
+    const blackSpotSymbol = Symbol.for("blackSpot");
+    obj[blackSpotSymbol] = true;
+    return obj;
+}
+
+const obj = {};
+console.log(addBlackSpot(obj)); 
