@@ -9,9 +9,9 @@
     <script>
         class Book {
             constructor(title, pubYear, price) {
-                this.newtitle = title;
-                this.newpubYear = pubYear;
-                this.newprice = price;
+                this._title = title;
+                this._pubYear = pubYear;
+                this._price = price;
             }
 
             get title() {
@@ -20,7 +20,7 @@
 
             set title(value) {
                 if (value.trim() === '') {
-                    throw new Error('Название не должно быть пустой строкой');
+                    throw new Error('Название не должно быть пустой строкой!!');
                 }
                 this.newtitle = value;
             }
@@ -31,7 +31,7 @@
 
             set pubYear(value) {
                 if (typeof value !== 'number' || value <= 0) {
-                    throw new Error('Год публикации должен быть положительным числом');
+                    throw new Error('Год публикации должен быть положительным числом!!');
                 }
                 this.newpubYear = value;
             }
@@ -42,7 +42,7 @@
 
             set price(value) {
                 if (typeof value !== 'number' || value <= 0) {
-                    throw new Error('Цена должна быть положительным числом');
+                    throw new Error('Цена должна быть положительным числом!!!');
                 }
                 this.newprice = value;
             }

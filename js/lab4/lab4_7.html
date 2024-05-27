@@ -10,7 +10,7 @@
         function getSecondsToday() {
     const now = new Date();
     const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    return Math.floor((now - startOfDay) / 1000);
+    return Math.floor((now - start) / 1000);
 }
 
 console.log(getSecondsToday());

@@ -9,25 +9,25 @@
     <script>
         class Book {
             constructor(title, pubYear, price) {
-                this.newtitle = title;
-                this.newpubYear = pubYear;
-                this.newprice = price;
+                this._title = title;
+                this._pubYear = pubYear;
+                this._price = price;
 
             }
 
             get title() {
-                return this.newtitle;
+                return this._title;
             }
 
             set title(value) {
                 if (value.trim() === '') {
                     throw new Error('Название не должно быть пустой строкой');
                 }
-                this.newtitle = value;
+                this._title = value;
             }
 
             get pubYear() {
-                return this.newpubYear;
+                return this._pubYear;
             }
 
             set pubYear(value) {
