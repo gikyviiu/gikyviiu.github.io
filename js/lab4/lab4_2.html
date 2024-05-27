@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4</title>
+</head>
+<body>
+    <script>
+        class Book {
+            constructor(title, pubYear, price) {
+                this.newtitle = title;
+                this.newpubYear = pubYear;
+                this.newprice = price;
+
+            }
+
+            get title() {
+                return this.newtitle;
+            }
+
+            set title(value) {
+                if (value.trim() === '') {
+                    throw new Error('Название не должно быть пустой строкой');
+                }
+                this.newtitle = value;
+            }
+
+            get pubYear() {
+                return this.newpubYear;
+            }
+
+            set pubYear(value) {
+                if (typeof value !== 'number' || value <= 0) {
+                    throw new Error('Год публикации должен быть положительным числом');
+                }
+                this.newpubYear = value;
+            }
+
+            get price() {
+                return this.newprice;
+            }
+
+            set price(value) {
+                if (typeof value !== 'number' || value <= 0) {
+                    throw new Error('Цена должна быть положительным числом');
+                }
+                this.newprice = value;
+            }
+
+            show() {
+                console.log(`Название: ${this.title}, Цена: ${this.price}`);
+            }
+        }
+
+        const newbook = new Book('The Gabriel Hounds', 1967, 134);
+        newbook.show();
+
+        try {
+            newbook.title = '';
+        } catch (s) {
+            console.error(s.message);
+        }
+
+        try {
+            newbook.pubYear = -2020;
+        } catch (s) {
+            console.error(s.message);
+        }
+
+        try {
+            newbook.price = 0;
+        } catch (s) {
+            console.error(s.message);
+        }
+    </script>
+</body>
+</html>
