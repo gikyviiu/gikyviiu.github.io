@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Сообщение</title>
+    <title>Сообщения</title>
     <style>
         body {
             margin: 10px auto;
@@ -51,13 +51,13 @@
             <h3>Лошадь</h3>
             <p>Домашняя лошадь — животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид
                 дикой лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.</p>
-            <button class="close">[x]</button>
+            <button class="remove-button">[x]</button>
         </div>
         <div class="pane">
             <h3>Осёл</h3>
             <p>Домашний осёл или ишак — одомашненный подвид дикого осла, сыгравший важную историческую роль в развитии
                 хозяйства и культуры человека. Все одомашненные ослы относятся к африканским ослам.</p>
-            <button class="close">[x]</button>
+            <button class="remove-button">[x]</button>
         </div>
         <div class="pane">
             <h3>Корова, а также пара слов о диком быке, о волах и о тёлках. </h3>
@@ -66,14 +66,14 @@
                 Молодых (до первой стельности) самок называют
                 тёлками.
             </p>
-            <button class="close">[x]</button>
+            <button class="remove-button">[x]</button>
         </div>
     </div>
 
     <script>
         'use strict';
 
-        const removeButtons = document.querySelectorAll('.close');
+        const removeButtons = document.querySelectorAll('.remove-button');
 
         removeButtons.forEach(function (button) {
             button.addEventListener('click', function () {
