@@ -7,18 +7,28 @@
 </head>
 <body>
     <script>
-        'use strict'
-        let age = prompt("Укажите Ваш возраст")
-        let gender = prompt("Укажите ваш пол (муж/жен)")
-        if (age >= 0 && age <= 17)
-            alert("Вам работать ещё рано — учитесь")
-        else if (age >= 18)
-            if((age <= 59 && gender === "муж") || (age <= 54 && gender === "жен"))
-                alert("Вам ещё работать и работать")
-            else if((age >= 60 && gender === "муж") || (age >= 55 && gender === "жен"))
-                alert("Скоро пенсия!")
-            else alert("Да кто ты такой?")
-        else alert("Да кто ты такой?")
+        let age, gender;
+        age = prompt("Введите возраст: ");
+        gender = prompt("Введите пол (м/ж): ");
+
+        if (age > 0 && age < 18) {
+            alert("Вам работать ещё рано — учитесь");
+        }
+        else if (age > 17 && age < 60 && (gender == "м") ||
+            age > 17 && age < 55 && (gender == "ж")) {
+            alert("Вам ещё работать и работать");
+        }
+        else if (age >= 60 && age <= 64 && (gender == "м") ||
+            age >= 55 && age <= 59 && (gender == "ж")) {
+            alert("Скоро пенсия!")
+        }
+        else if (age >= 65 && (gender == "м") ||
+            age >= 60  && (gender == "ж")) {
+            alert("Вам пора на пенсию");
+        }
+        else {
+            alert("Да кто ты такой?");
+        }
     </script>
 </body>
 </html>
