@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4</title>
+</head>
+<body>
+    <script>
+        let obj = {
+    className: 'open menu'
+};
+
+obj.addClass = function(cls) {
+    if (!this.className.split(' ').includes(cls)) {
+        this.className += ` ${cls}`;
+    }
+    return this;
+};
+
+obj.removeClass = function(cls) {
+    this.className = this.className.split(' ').filter(c => c !== cls).join(' ');
+    return this;
+};
+obj.addClass('new');
+obj.addClass('open'); 
+obj.removeClass('menu'); 
+console.log(obj.className); 
+    </script>
+</body>
+</html>
+

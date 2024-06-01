@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4</title>
+</head>
+<body>
+    <script>
+        class Book {
+            constructor(title, pubYear, price) {
+                this.title = title;
+                this.pubYear = pubYear;
+                this.price = price;
+            }
+
+            show() {
+                console.log(`Title: ${this.title}, Price: ${this.price}`);
+            }
+        }
+
+        const testbook = new Book('The Gabriel Hounds', 1967, 134);
+        testbook.show();
+    </script>
+</body>
+</html>

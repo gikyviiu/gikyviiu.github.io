@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4</title>
+</head>
+<body>
+    <script>
+        let obj = {
+    name: "John",
+    age: 30,
+    address: {
+        street: "123 Main Street",
+        city: "New York"
+    }
+};
+
+
+let jsonString = JSON.stringify(obj, null, 2);
+console.log(jsonString);
+
+let obj2 = JSON.parse(jsonString);
+console.log(JSON.stringify(obj) === JSON.stringify(obj2));
+ 
+    </script>
+</body>
+</html>
+
