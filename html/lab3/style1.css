@@ -1,6 +1,6 @@
 body{
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: black;
 }
 
 p{
@@ -23,4 +23,6 @@ em{
     margin-right: auto;
     padding-left: 10px;
     padding-right: 10px;
+    font-size: 1.5rem;
+    line-height: 2rem;
 }
