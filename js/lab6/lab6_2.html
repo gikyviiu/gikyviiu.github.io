@@ -1,47 +1,41 @@
-
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab6</title>
+    <title>Document</title>
     <style>
         ::placeholder {
-            color: blue;
-        }
+        color: blue;
+    }
     </style>
 </head>
-
 <body>
-
-    <form id="form">
-        <label for="placeholder"></label>   
-        <input id="placeholder" type="email" data-placeholder="Введите почту">
-    </form>
-    
+    <div id="input-placeholder">
+        <label for="placeholder"></label>
+        <input type="text" id="placeholder" required minlength="3" maxlength="10" data-placeholder="Введите что-нибудь умное" size="25">
+    </div>
     <script>
+        "use strict"
+        let label_el = document.getElementsByTagName("label")[0];
+        let input_el = document.getElementsByTagName("input")[0];
+        let placeholder = input_el.dataset.placeholder;
+        input_el.setAttribute("placeholder", placeholder);
+        label_el.textContent = placeholder;
+        label_el.style.display = "none";
 
-      let form = document.getElementById("form");
-      let formField = form.getElementsByTagName('input')[0];
-      let label = form.getElementsByTagName('label')[0];
+        input_el.onfocus = function ()
+        {
+            label_el.style.display = "block"
+            input_el.setAttribute("placeholder", "Вводить сюда");
+        }
 
-      label.style.visibility = 'hidden';
-
-      formField.setAttribute('placeholder', formField.dataset.placeholder);
-      label.innerHTML = formField.dataset.placeholder;
-
-      formField.addEventListener('focus', () => {
-          label.style.visibility = 'visible';
-          formField.setAttribute('placeholder', 'example@yandex.ru');
-      });
-
-      formField.addEventListener('blur', () => {
-          label.style.visibility = 'hidden';
-          formField.setAttribute('placeholder', formField.dataset.placeholder);
-          
-      });
-
+        input_el.onblur = function ()
+        {
+            label_el.style.display = "none"
+            input_el.setAttribute("placeholder", placeholder);
+        }
+        console.log(placeholder);
     </script>
-
 </body>
 </html>
