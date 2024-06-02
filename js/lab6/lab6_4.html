@@ -13,14 +13,14 @@
         border: 1px solid black;
         padding: 5px;
         cursor: pointer;
-        position: relative; /* Добавляем position: relative для позиционирования */
-        overflow: hidden; /* Скрываем текст, выходящий за границы ячейки */
+        position: relative; 
+        overflow: hidden; 
     }
 
     textarea {
         width: 100%;
         height: 100px;
-        resize: none; /* Отключаем изменение размера */
+        resize: none; 
     }
 </style>
 </head>
@@ -39,7 +39,7 @@
 <script>
 document.getElementById('editableTable').addEventListener('click', function(event) {
     if (event.target.tagName === 'TD') {
-        if (document.querySelector('textarea')) return; // Проверяем, не редактируется ли уже другая ячейка
+        if (document.querySelector('textarea')) return;
         const td = event.target;
         const originalContent = td.innerHTML;
         const textarea = document.createElement('textarea');
