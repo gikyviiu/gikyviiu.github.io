@@ -59,6 +59,15 @@
         }
     }
 
+    document.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                handleOk();
+            } else if (e.key === 'Escape') {
+                handleCancel();
+            }
+        });
+
+
     function processInput(input) {
         if (input === null || input === "") {
             alert("Вы не ввели имя!");
