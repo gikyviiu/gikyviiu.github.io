@@ -24,30 +24,23 @@
   <div id="content" contenteditable="false">
     This is a div. Press Ctrl+E to convert it to textarea.
   </div>
+  <textarea id="textArea"></textarea>
 
   <script>
     document.addEventListener('keydown', function(event) {
       if (event.ctrlKey && event.key === 'e') {
         var div = document.getElementById('content');
         var textarea = document.getElementById('textArea');
-        div.contentEditable = 'true';
-        div.style.backgroundColor = '#f9f9f9';
-        div.focus();
+        textarea.value = div.innerText;
+        div.style.display = 'none';
         textarea.style.display = 'block';
-        textarea.value = div.innerHTML;
-      } else if (event.ctrlKey && event.key === 's') {
+        textarea.focus();
+      } else if ((event.ctrlKey && event.key === 's') || event.key === 'Escape') {
         var div = document.getElementById('content');
         var textarea = document.getElementById('textArea');
-        div.innerHTML = textarea.value;
-        div.contentEditable = 'false';
-        div.style.backgroundColor = 'initial';
+        div.innerText = textarea.value;
         textarea.style.display = 'none';
-      } else if (event.key === 'Escape') {
-        var div = document.getElementById('content');
-        var textarea = document.getElementById('textArea');
-        div.contentEditable = 'false';
-        div.style.backgroundColor = 'initial';
-        textarea.style.display = 'none';
+        div.style.display = 'block';
       }
     });
   </script>
