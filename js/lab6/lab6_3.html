@@ -21,7 +21,7 @@
   </style>
 </head>
 <body>
-  <div id="content" contenteditable="true">
+  <div id="content" contenteditable="false">
     This is a div. Press Ctrl+E to convert it to textarea.
   </div>
   <textarea id="textArea"></textarea>
@@ -31,20 +31,23 @@
       if (event.ctrlKey && event.key === 'e') {
         var div = document.getElementById('content');
         var textarea = document.getElementById('textArea');
-        div.style.display = 'none';
+        div.contentEditable = 'true';
+        div.style.backgroundColor = '#f9f9f9';
+        div.focus();
         textarea.style.display = 'block';
         textarea.value = div.innerHTML;
-        textarea.focus();
       } else if (event.ctrlKey && event.key === 's') {
         var div = document.getElementById('content');
         var textarea = document.getElementById('textArea');
         div.innerHTML = textarea.value;
-        div.style.display = 'block';
+        div.contentEditable = 'false';
+        div.style.backgroundColor = 'initial';
         textarea.style.display = 'none';
       } else if (event.key === 'Escape') {
         var div = document.getElementById('content');
         var textarea = document.getElementById('textArea');
-        div.style.display = 'block';
+        div.contentEditable = 'false';
+        div.style.backgroundColor = 'initial';
         textarea.style.display = 'none';
       }
     });
