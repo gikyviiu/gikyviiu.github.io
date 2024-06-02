@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Div to Textarea</title>
+  <style>
+    #content {
+      border: 1px solid #000;
+      padding: 10px;
+      margin: 10px;
+    }
+    #textArea {
+      display: none;
+      border: 1px solid #000;
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="content" contenteditable="true">
+    This is a div. Press Ctrl+E to convert it to textarea.
+  </div>
+  <textarea id="textArea"></textarea>
+
+  <script>
+    document.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.key === 'e') {
+        var div = document.getElementById('content');
+        var textarea = document.getElementById('textArea');
+        div.style.display = 'none';
+        textarea.style.display = 'block';
+        textarea.value = div.innerHTML;
+        textarea.focus();
+      } else if (event.ctrlKey && event.key === 's') {
+        var div = document.getElementById('content');
+        var textarea = document.getElementById('textArea');
+        div.innerHTML = textarea.value;
+        div.style.display = 'block';
+        textarea.style.display = 'none';
+      } else if (event.key === 'Escape') {
+        var div = document.getElementById('content');
+        var textarea = document.getElementById('textArea');
+        div.style.display = 'block';
+        textarea.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
