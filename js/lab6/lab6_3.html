@@ -1,47 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Div to Textarea</title>
-  <style>
-    #content {
-      border: 1px solid #000;
-      padding: 10px;
-      margin: 10px;
-    }
-    #textArea {
-      display: none;
-      border: 1px solid #000;
-      padding: 10px;
-      margin: 10px;
-      width: 200px;
-      height: 100px;
-    }
-  </style>
-</head>
-<body>
-  <div id="content" contenteditable="false">
-    This is a div. Press Ctrl+E to convert it to textarea.
-  </div>
+<html lang="ru">
 
-  <script>
-    document.addEventListener('keydown', function(event) {
-      if (event.ctrlKey && event.key === 'e') {
-        var div = document.getElementById('content');
-        var textarea = document.createElement('textarea');
-        textarea.value = div.innerText;
-        div.style.display = 'none';
-        textarea.style.display = 'block';
-        textarea.focus();
-      } else if ((event.ctrlKey && event.key === 's') || event.key === 'Escape') {
-        var div = document.getElementById('content');
-        var textarea = document.getElementById('textArea');
-        div.innerText = textarea.value;
-        textarea.style.display = 'none';
-        div.style.display = 'block';
-      }
-    });
-  </script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab6</title>
+</head>
+
+<body>
+
+    <div id="forChange"></div>
+    <script>
+
+        let div = document.getElementById('forChange');
+        let textarea = null;
+
+        document.onkeydown = function (event) {
+            if (event.ctrlKey && event.key === 'e') {
+                event.preventDefault();
+                textarea = document.createElement('textarea');
+                div.replaceWith(textarea);
+                textarea.focus();
+                textarea.value = div.innerHTML;
+            }
+            else if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+                div.innerHTML = textarea.value;
+                textarea.replaceWith(div);
+                textarea = null;
+            }
+            else if (event.key === 'Escape') {
+                event.preventDefault();
+                textarea.replaceWith(div);
+                textarea = null;
+            }
+        };
+
+    </script>
+
 </body>
+
 </html>
