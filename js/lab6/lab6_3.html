@@ -24,13 +24,12 @@
   <div id="content" contenteditable="false">
     This is a div. Press Ctrl+E to convert it to textarea.
   </div>
-  <textarea id="textArea"></textarea>
 
   <script>
     document.addEventListener('keydown', function(event) {
       if (event.ctrlKey && event.key === 'e') {
         var div = document.getElementById('content');
-        var textarea = document.getElementById('textArea');
+        var textarea = document.createElement('textarea');
         textarea.value = div.innerText;
         div.style.display = 'none';
         textarea.style.display = 'block';
