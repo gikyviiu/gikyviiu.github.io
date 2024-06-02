@@ -1,57 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    .modal {
-      display: none; 
-      position: fixed; 
-      z-index: 1; 
-      left: 0;
-      top: 0;
-      width: 100%; 
-      height: 100%; 
-      overflow: auto; 
-      background-color: rgba(0,0,0,0.5); 
-    }
-    .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto; 
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%; 
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модальное окно с формой</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Модальное окно</h2>
+<button onclick="showPrompt('Введите ваше имя:', processInput)">Открыть форму</button>
 
-<!-- Модальное окно -->
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Некоторый текст в модальном окне..</p>
-  </div>
+<div id="modal" class="modal">
+    <p id="message"></p>
+    <input type="text" id="inputField">
+    <br><br>
+    <button onclick="handleOk()">OK</button>
+    <button onclick="handleCancel()">Отмена</button>
 </div>
 
 <script>
-// Найти элементы
-var modal = document.getElementById('myModal');
+    function showPrompt(message, callback) {
+        var modal = document.getElementById('modal');
+        var messageElement = document.getElementById('message');
+        var inputField = document.getElementById('inputField');
 
-// Найти элемент, который закрывает модальное окно
-var span = document.getElementsByClassName("close")[0];
+        messageElement.textContent = message;
+        inputField.focus();
 
-// Когда пользователь кликает на крестик, закрыть модальное окно
-span.onclick = function() {
-  modal.style.display = "none";
-}
+        modal.style.display = 'block';
 
-// Когда пользователь кликает где-либо за пределами модального окна, закрыть его
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+        window.handleOk = function() {
+            modal.style.display = 'none';
+            callback(inputField.value);
+            cleanup();
+        }
+
+        window.handleCancel = function() {
+            modal.style.display = 'none';
+            callback(null);
+            cleanup();
+        }
+
+        function cleanup() {
+            delete window.handleOk;
+            delete window.handleCancel;
+        }
+    }
+
+    function processInput(input) {
+        if (input === null || input === "") {
+            alert("Вы не ввели имя!");
+        } else {
+            alert("Привет, " + input + "!");
+        }
+    }
 </script>
 
 </body>
