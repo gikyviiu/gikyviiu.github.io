@@ -4,75 +4,126 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Модальное окно с формой</title>
-<style>
-    #promptContainer {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        padding: 20px;
-        border: 1px solid #ccc;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-</style>
+
 </head>
 <body>
 
-<div id="promptContainer">
-    <div id="promptMessage"></div>
-    <input type="text" id="promptInput">
-    <button id="okButton">OK</button>
-    <button id="cancelButton">Отмена</button>
-</div>
+    <template id="prompt-template">
+        <div class="prompt-container">
+          <div class="prompt-form">
+            <div class="prompt-message"></div>
+            <input type="text" class="prompt-input" />
+            <div class="prompt-buttons">
+              <button type="button" class="prompt-ok-button">OK</button>
+              <button type="button" class="prompt-cancel-button">Отмена</button>
+            </div>
+          </div>
+        </div>
+      </template>
+      
+      <script>
+        (function () {
+          const promptTemplate = document.getElementById('prompt-template');
+      
+          /*
+           * Отображает модальную форму с сообщением и полем ввода.
+           * @param {string} html Сообщение в форме HTML.
+           * @param {function(string|null)} callback Функция обратного вызова, вызываемая после ввода пользователем.
+           */
+          function showPrompt(html, callback) {
+            // Создаем копию шаблона формы.
+            const promptForm = promptTemplate.content.cloneNode(true);
+      
+            // Заполняем сообщение.
+            const messageElement = promptForm.querySelector('.prompt-message');
+            messageElement.innerHTML = html;
+      
+            // Добавляем обработчики событий на элементы формы.
+            const inputElement = promptForm.querySelector('.prompt-input');
+            const okButtonElement = promptForm.querySelector('.prompt-ok-button');
+            const cancelButtonElement = promptForm.querySelector('.prompt-cancel-button');
+      
+            okButtonElement.addEventListener('click', () => {
+              callback(inputElement.value);
+              closePrompt();
+            });
+      
+            cancelButtonElement.addEventListener('click', () => {
+              callback(null);
+              closePrompt();
+            });
+      
+            inputElement.addEventListener('keydown', (event) => {
+              // Переключаем фокус между полями формы с помощью Tab/Shift+Tab.
+              if (event.key === 'Tab') {
+                if (event.shiftKey) {
+                  cancelButtonElement.focus();
+                } else {
+                  okButtonElement.focus();
+                }
+                event.preventDefault();
+              }
+      
+              // Вызываем функцию обратного вызова при нажатии Enter.
+              if (event.key === 'Enter') {
+                callback(inputElement.value);
+                closePrompt();
+              }
+            });
+      
+            // Вызываем функцию обратного вызова при нажатии Esc.
+            window.addEventListener('keydown', (event) => {
+              if (event.key === 'Escape') {
+                callback(null);
+                closePrompt();
+              }
+            });
+      
+            // Помещаем форму в центр окна.
+            const promptContainerElement = promptForm.querySelector('.prompt-container');
+            centerElement(promptContainerElement);
+      
+            // Отображаем форму.
+            document.body.appendChild(promptForm);
+      
+            // Устанавливаем фокус на поле ввода.
+            inputElement.focus();
+      
+            // Функция для закрытия формы.
+            function closePrompt() {
+              document.body.removeChild(promptForm);
+              removeEventListeners();
+            }
+      
+            // Функция для удаления обработчиков событий со всех элементов формы.
+            function removeEventListeners() {
+              okButtonElement.removeEventListener('click', okButtonEventHandler);
+              cancelButtonElement.removeEventListener('click', cancelButtonEventHandler);
+              inputElement.removeEventListener('keydown', inputKeydownEventHandler);
+              window.removeEventListener('keydown', windowKeydownEventHandler);
+            }
+          }
+      
+          // Функция для центрирования элемента в окне.
+          function centerElement(element) {
+            const { width, height } = element.getBoundingClientRect();
+            const left = (window.innerWidth - width) / 2;
+            const top = (window.innerHeight - height) / 2;
+            element.style.left = ${left}px;
+            element.style.top = ${top}px;
+          }
+      
+          // Определяем функцию showPrompt глобально.
+          window.showPrompt = showPrompt;
+        })();
 
-<script>
-function showPrompt(html, callback) {
-    const promptContainer = document.getElementById('promptContainer');
-    const promptMessage = document.getElementById('promptMessage');
-    const promptInput = document.getElementById('promptInput');
-    const okButton = document.getElementById('okButton');
-    const cancelButton = document.getElementById('cancelButton');
-
-    promptMessage.innerHTML = html;
-    promptInput.value = '';
-    
-    promptContainer.style.display = 'block';
-    promptInput.focus();
-
-    function closePrompt() {
-        promptContainer.style.display = 'none';
-        document.removeEventListener('keydown', keyPressHandler);
-    }
-
-    function keyPressHandler(event) {
-        if (event.key === "Escape") {
-            callback(null);
-            closePrompt();
-        } else if (event.key === "Enter") {
-            callback(promptInput.value);
-            closePrompt();
-        }
-    }
-
-    okButton.addEventListener('click', function() {
-        callback(promptInput.value);
-        closePrompt();
-    });
-
-    cancelButton.addEventListener('click', function() {
-        callback(null);
-        closePrompt();
-    });
-
-    document.addEventListener('keydown', keyPressHandler);
-}
-
-showPrompt("Введите что-нибудь<br>... умное:)", function(value) {
+        showPrompt("Введите что-нибудь<br>... умное:)", function(value) {
   alert(value);
 });
+      </script>
+      
+
+
 </script>
 </body>
 </html>
