@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Редактируемая таблица</title>
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    textarea {
+        width: 100%;
+        height: 100px;
+    }
+</style>
+</head>
+<body>
+<table id="editableTable">
+    <tr>
+        <td>Ячейка 1</td>
+        <td>Ячейка 2</td>
+    </tr>
+    <tr>
+        <td>Ячейка 3</td>
+        <td>Ячейка 4</td>
+    </tr>
+</table>
+
+<script>
+document.getElementById('editableTable').addEventListener('click', function(event) {
+    if (event.target.tagName === 'TD') {
+        if (document.querySelector('textarea')) return; // Проверяем, не редактируется ли уже другая ячейка
+        const td = event.target;
+        const originalContent = td.innerHTML;
+        const textarea = document.createElement('textarea');
+        textarea.value = originalContent;
+        td.innerHTML = '';
+        td.appendChild(textarea);
+        
+        const okButton = document.createElement('button');
+        okButton.textContent = 'OK';
+        okButton.addEventListener('click', function() {
+            td.innerHTML = textarea.value;
+        });
+
+        const cancelButton = document.createElement('button');
+        cancelButton.textContent = 'Отмена';
+        cancelButton.addEventListener('click', function() {
+            td.innerHTML = originalContent;
+        });
+
+        td.appendChild(okButton);
+        td.appendChild(cancelButton);
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Модальное окно с формой</title>
+<style>
+    #promptContainer {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+        z-index: 1000;
+    }
+</style>
+</head>
+<body>
+
+<div id="promptContainer">
+    <div id="promptMessage"></div>
+    <input type="text" id="promptInput">
+    <button id="okButton">OK</button>
+    <button id="cancelButton">Отмена</button>
+</div>
+
+<script>
+function showPrompt(html, callback) {
+    const promptContainer = document.getElementById('promptContainer');
+    const promptMessage = document.getElementById('promptMessage');
+    const promptInput = document.getElementById('promptInput');
+    const okButton = document.getElementById('okButton');
+    const cancelButton = document.getElementById('cancelButton');
+
+    promptMessage.innerHTML = html;
+    promptInput.value = '';
+    
+    promptContainer.style.display = 'block';
+    promptInput.focus();
+
+    function closePrompt() {
+        promptContainer.style.display = 'none';
+        document.removeEventListener('keydown', keyPressHandler);
+    }
+
+    function keyPressHandler(event) {
+        if (event.key === "Escape") {
+            callback(null);
+            closePrompt();
+        } else if (event.key === "Enter") {
+            callback(promptInput.value);
+            closePrompt();
+        }
+    }
+
+    okButton.addEventListener('click', function() {
+        callback(promptInput.value);
+        closePrompt();
+    });
+
+    cancelButton.addEventListener('click', function() {
+        callback(null);
+        closePrompt();
+    });
+
+    document.addEventListener('keydown', keyPressHandler);
+}
+
+showPrompt("Введите что-нибудь<br>... умное:)", function(value) {
+  alert(value);
+});
+</script>
+</body>
+</html>
