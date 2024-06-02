@@ -1,14 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modal Prompt</title>
-<link rel="stylesheet" href="s.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модальное окно с формой</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+
 <button onclick="showPrompt('Введите ваше имя:', processInput)">Открыть форму</button>
 
-<script src="scp.js"></script>
+<div id="modal" class="modal">
+    <p id="message"></p>
+    <input type="text" id="inputField">
+    <br><br>
+    <button onclick="handleOk()">OK</button>
+    <button onclick="handleCancel()">Отмена</button>
+</div>
+
+<script>
+    'use strict'
+    function showPrompt(message, callback) {
+        var modal = document.getElementById('modal');
+        var messageElement = document.getElementById('message');
+        var inputField = document.getElementById('inputField');
+
+        messageElement.textContent = message;
+        inputField.focus();
+
+        modal.style.display = 'block';
+
+        window.handleOk = function() {
+            modal.style.display = 'none';
+            callback(inputField.value);
+            cleanup();
+        }
+
+        window.handleCancel = function() {
+            modal.style.display = 'none';
+            callback(null);
+            cleanup();
+        }
+
+        function cleanup() {
+            delete window.handleOk;
+            delete window.handleCancel;
+        }
+    }
+
+    function processInput(input) {
+        if (input === null || input === "") {
+            alert("Вы не ввели имя!");
+        } else {
+            alert("Привет, " + input + "!");
+        }
+    }
+</script>
+
 </body>
 </html>
