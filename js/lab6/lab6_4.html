@@ -14,32 +14,23 @@
         padding: 5px;
         cursor: pointer;
         position: relative; /* Добавляем position: relative для позиционирования */
-        overflow: hidden; /* Скрываем избыточный текст */
     }
 
     textarea {
         width: 100%;
         height: 100px;
     }
-
-    .placeholder {
-        position: absolute;
-        top: 50%;
-        left: 5px;
-        transform: translateY(-50%);
-        color: #999;
-    }
 </style>
 </head>
 <body>
 <table id="editableTable">
     <tr>
-        <td><span class="placeholder">Введите текст</span></td>
-        <td><span class="placeholder">Введите текст</span></td>
+        <td>Ячейка 1</td>
+        <td>Ячейка 2</td>
     </tr>
     <tr>
-        <td><span class="placeholder">Введите текст</span></td>
-        <td><span class="placeholder">Введите текст</span></td>
+        <td>Ячейка 3</td>
+        <td>Ячейка 4</td>
     </tr>
 </table>
 
@@ -54,33 +45,16 @@ document.getElementById('editableTable').addEventListener('click', function(even
         td.innerHTML = '';
         td.appendChild(textarea);
 
-        const placeholder = td.querySelector('.placeholder');
-        if (placeholder) {
-            placeholder.style.display = 'none';
-        }
-
         const okButton = document.createElement('button');
         okButton.textContent = 'OK';
         okButton.addEventListener('click', function() {
-            if (textarea.value.trim() === '') {
-                if (placeholder) {
-                    placeholder.style.display = 'block';
-                }
-            } else {
-                td.innerHTML = textarea.value;
-            }
+            td.innerHTML = textarea.value;
         });
 
         const cancelButton = document.createElement('button');
         cancelButton.textContent = 'Отмена';
         cancelButton.addEventListener('click', function() {
-            if (textarea.value.trim() === '') {
-                if (placeholder) {
-                    placeholder.style.display = 'block';
-                }
-            } else {
-                td.innerHTML = originalContent;
-            }
+            td.innerHTML = originalContent;
         });
 
         td.appendChild(okButton);
