@@ -21,7 +21,6 @@
 </head>
 <body>
 
-<button onclick="showPrompt('Введите ваше имя:', processInput)">Открыть форму</button>
 
 <div id="modal" class="modal">
     <p id="message"></p>
@@ -76,6 +75,7 @@
             alert("Привет, " + input + "!");
         }
     }
+    showPrompt('Введите ваше имя:', processInput);
 </script>
 
 </body>
