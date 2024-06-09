@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab 6</title>
+    <title>Custom Placeholder</title>
     <style>
         ::placeholder {
             color: blue;
         }
-        label {
+        .placeholder {
             position: absolute;
             pointer-events: none;
             left: 5px;
             top: 10px;
             transition: 0.2s ease all;
+            color: blue;
         }
-        input:focus + label, input:valid + label, .active {
+        input:focus + .placeholder, input:valid + .placeholder {
             top: -12px;
             font-size: 12px;
             color: blue;
@@ -24,23 +25,27 @@
 </head>
 <body>
     <div id="input-placeholder">
-        <input type="text" id="placeholder" required minlength="3" maxlength="10" data-placeholder="Введите что-нибудь умное" size="25">
-        <label for="placeholder"></label>
+        <input type="text" id="placeholder" required minlength="3" maxlength="10" data-placeholder="Enter something clever" size="25">
+        <label for="placeholder" class="placeholder"></label>
     </div>
     <script>
-        "use strict"
-        let input_el = document.getElementById("placeholder");
-        let placeholder = input_el.dataset.placeholder;
+        "use strict";
+        let inputEl = document.getElementById("placeholder");
+        let placeholderText = inputEl.dataset.placeholder;
+        let placeholderLabel = inputEl.nextElementSibling;
 
-        input_el.onfocus = function () {
-            input_el.nextElementSibling.classList.add("active");
-        }
+        // Initial setup
+        placeholderLabel.textContent = placeholderText;
 
-        input_el.onblur = function () {
-            if (input_el.value === "") {
-                input_el.nextElementSibling.classList.remove("active");
+        inputEl.addEventListener("focus", function() {
+            placeholderLabel.classList.add("placeholder");
+        });
+
+        inputEl.addEventListener("blur", function() {
+            if (inputEl.value === "") {
+                placeholderLabel.classList.remove("placeholder");
             }
-        }
+        });
     </script>
 </body>
 </html>
