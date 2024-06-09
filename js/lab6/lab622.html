@@ -8,13 +8,23 @@
         ::placeholder {
             color: blue;
         }
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
         .placeholder {
             position: absolute;
-            pointer-events: none;
-            left: 5px;
-            top: 10px;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             transition: 0.2s ease all;
             color: blue;
+            pointer-events: none;
         }
         input:focus + .placeholder, input:valid + .placeholder {
             top: -12px;
@@ -24,7 +34,7 @@
     </style>
 </head>
 <body>
-    <div id="input-placeholder">
+    <div class="input-container">
         <input type="text" id="placeholder" required minlength="3" maxlength="10" data-placeholder="Enter something clever" size="25">
         <label for="placeholder" class="placeholder"></label>
     </div>
