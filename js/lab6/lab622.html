@@ -1,61 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Placeholder</title>
     <style>
-        ::placeholder {
-            color: blue;
+        body {
+            font-family: Arial, sans-serif;
         }
-        .input-container {
+
+        .form-group {
             position: relative;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
+
+        label {
+            position: absolute;
+            top: 0;
+            left: 5px;
+            transition: all 0.3s;
+            pointer-events: none;
+            font-size: 16px;
+            color: grey;
+        }
+
         input {
-            padding: 10px;
             width: 100%;
+            padding: 10px 5px;
+            font-size: 16px;
             box-sizing: border-box;
         }
-        .placeholder {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: 0.2s ease all;
-            color: blue;
-            pointer-events: none;
-        }
-        input:focus + .placeholder, input:valid + .placeholder {
-            top: -12px;
+
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+            top: -20px;
+            left: 5px;
             font-size: 12px;
             color: blue;
         }
     </style>
 </head>
+
 <body>
-    <div class="input-container">
-        <input type="text" id="placeholder" required minlength="3" maxlength="10" data-placeholder="Enter something clever" size="25">
-        <label for="placeholder" class="placeholder"></label>
-    </div>
+
+    <form id="form">
+        <div class="form-group">
+            <input id="placeholder" type="text" placeholder=" " data-placeholder="Введите что-нибудь умное">
+            <label for="placeholder">Введите что-нибудь умное</label>
+        </div>
+    </form>
+
     <script>
-        "use strict";
-        let inputEl = document.getElementById("placeholder");
-        let placeholderText = inputEl.dataset.placeholder;
-        let placeholderLabel = inputEl.nextElementSibling;
+        'use strict';
 
-        // Initial setup
-        placeholderLabel.textContent = placeholderText;
+        let field = document.getElementById("placeholder");
+        let label = field.nextElementSibling;
 
-        inputEl.addEventListener("focus", function() {
-            placeholderLabel.classList.add("placeholder");
+        field.addEventListener('focus', () => {
+            label.style.color = 'blue';
         });
 
-        inputEl.addEventListener("blur", function() {
-            if (inputEl.value === "") {
-                placeholderLabel.classList.remove("placeholder");
+        field.addEventListener('blur', () => {
+            if (!field.value) {
+                label.style.color = 'blue';
             }
         });
     </script>
+
 </body>
+
 </html>
